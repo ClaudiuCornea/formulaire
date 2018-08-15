@@ -3,6 +3,10 @@
     use PHPMailer\PHPMailer\PHPMailer;
     require 'vendor/autoload.php';
     function check_input($x){
+        /*
+        The function check if the variable is
+        defiend and not empty.
+        */
         if(isset($x) AND !empty($x)){
             return(TRUE);
         }else{
@@ -10,6 +14,10 @@
         }
     }
     function validate_extension($extension){
+        /*
+        The function check if the user have input
+        a file with the right extension.
+        */
         if($extension == "png" OR $extension == "jpg" OR $extension == "jpeg" OR $extension == "gif" OR $extension == ""){
             return(TRUE);
         }else{
@@ -18,6 +26,10 @@
     }
     $error_sanitize = [];
     if(isset($_POST["submit"])){
+        /*
+        We sanitize the user's inputs and check if
+        the email and the message aren't empty.
+        */
         $titre = check_input($_POST["titre"]) ? filter_var($_POST["titre"],FILTER_SANITIZE_STRING) : "";
         $nom = check_input($_POST["nom"]) ? filter_var($_POST["nom"],FILTER_SANITIZE_STRING) : "";
         $prenom = check_input($_POST["prenom"]) ? filter_var($_POST["prenom"], FILTER_SANITIZE_STRING) : "";
@@ -47,8 +59,15 @@
             array_push($error_sanitize, "sanitize_format");
         }
         if(count($error_sanitize) == 0){
+            /*
+            We validate the email.
+            */
             $val_email = filter_var($email, FILTER_VALIDATE_EMAIL);
             if($val_email){
+                /*
+                We are going to upload the file's user,
+                we consider the upload by default as true.
+                */
                 $upload_image = TRUE;
                 $image = new upload($_FILES["document"]);
                 $extension = ($image->file_src_name_ext);
@@ -71,6 +90,10 @@
                     header("Location: index.php?status=false&format_image=false");
                 }
                 if($upload_image){
+                    /*
+                    We are going to send an email from the form
+                    to the user and to the owner of the form.
+                    */
                     $mail = new PHPMailer;
                     $mail->isSMTP();
                     $mail->SMTPDebug = 0;
@@ -90,6 +113,10 @@
                     if (!$mail->send()){
                         header("Location: index.php?status=false&email_send=false");
                     }else{
+                        /*
+                        We are going to write in a json file
+                        all the user's informations that we need to stock.
+                        */
                         $user = [
                             "titre" => $titre,
                             "nom" => $nom,
