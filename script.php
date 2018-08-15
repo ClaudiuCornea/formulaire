@@ -85,13 +85,7 @@
                     $mail->addAddress(getenv("user_mail"));
                     $mail->addAddress($email);
                     $mail->Subject = $objet;
-                    if ($format == "html") {
-                        $mail->IsHTML(true);
-                        $mail->Body = $message;
-                    }else{
-                        $mail->IsHTML(false);
-                        $mail->Body = $message;
-                    }
+                    $mail->msgHTML($message);
                     $mail->addAttachment(__DIR__ . "/upload/" . $file);
                     if (!$mail->send()){
                         header("Location: index.php?status=false&email_send=false");
