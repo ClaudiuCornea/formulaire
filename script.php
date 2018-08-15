@@ -90,7 +90,7 @@
                     if (!$mail->send()){
                         header("Location: index.php?status=false&email_send=false");
                     }else{
-                        $user =[
+                        $user = [
                             "titre" => $titre,
                             "nom" => $nom,
                             "prenom" => $prenom,
@@ -112,11 +112,11 @@
                 header("Location: index.php?status=false&validation_email=false");
             }
         }else{
-            $string = 'index.php?status=false';
+            $string = "index.php?status=false";
             foreach($error_sanitize as $index=>$value){
-                $string .= '&'.$value.'=false';
+                $string .= "&" . $value . "=false";
             }
-            header('Location: '.$string);
+            header("Location: ". $string);
         }
     }
 ?>

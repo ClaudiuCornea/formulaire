@@ -5,12 +5,12 @@
     </head>
     <body>
         <?php
-            if(file_exists('log.json')){
+            if(file_exists("log.json")){
                 $json = file_get_contents("log.json");
                 $json_array = json_decode($json, TRUE);
                 if(count($json_array) > 0){
                     foreach ($json_array as $key => $value){
-                        $line = '<p>' . $value["prenom"] . ' | ' . $value["objet"] . ' | ' . $value["message"] . ' | ' . $value["date"] . ' | ' . $value["format"] . '</p>';
+                        $line = "<p>" . $value["prenom"] . " | " . $value["objet"] . " | " . $value["message"] . " | " . $value["date"] . " | " . $value["format"] . "</p>";
                         echo($line);
                     }
                 }else{
