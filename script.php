@@ -87,10 +87,10 @@
                     $mail->Subject = $objet;
                     if ($format == "html") {
                         $mail->IsHTML(true);
-                        $mail->Body = $mailBody;
+                        $mail->Body = $message;
                     }else{
                         $mail->IsHTML(false);
-                        $mail->Body = $mailBody;
+                        $mail->Body = $message;
                     }
                     $mail->addAttachment(__DIR__ . "/upload/" . $file);
                     if (!$mail->send()){
