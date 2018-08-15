@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PHP 4 Steps And Error</title>
+        <title>Formulaire by Claudiu</title>
     </head>
     <body>
         <form action = "script.php" method = "post" enctype = "multipart/form-data">

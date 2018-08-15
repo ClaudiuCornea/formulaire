@@ -98,8 +98,8 @@
                             "objet" => $objet,
                             "message" => $message,
                             "format" => $format,
+                            "file" => $file,
                             "date" => date('H:i:s l j/m/Y')];
-                        var_dump($user);
                         $json = file_get_contents("log.json");
                         $json_array = json_decode($json, TRUE);
                         $json_array[] = $user;
